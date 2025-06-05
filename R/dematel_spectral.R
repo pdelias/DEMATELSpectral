@@ -224,12 +224,26 @@ load_dematel_matrices <- function(d_file, t_file, header = FALSE) {
     stop(sprintf("File not found: %s", t_file))
   }
 
-  D <- as.matrix(read.csv(d_file, header = header))
-  T <- as.matrix(read.csv(t_file, header = header))
+  # Read CSV files with proper settings for DEMATEL matrices
+  D <- as.matrix(read.csv(d_file, header = header, row.names = NULL, check.names = FALSE))
+  T <- as.matrix(read.csv(t_file, header = header, row.names = NULL, check.names = FALSE))
 
-  # Ensure numeric
+  # Ensure numeric and handle any conversion issues
   mode(D) <- "numeric"
   mode(T) <- "numeric"
+
+  # Check for and remove any row/column names if they exist
+  dimnames(D) <- NULL
+  dimnames(T) <- NULL
+
+  # Validate that matrices are square
+  if (nrow(D) != ncol(D)) {
+    stop(sprintf("Matrix D is not square: %d x %d. Check if header=TRUE is needed.", nrow(D), ncol(D)))
+  }
+
+  if (nrow(T) != ncol(T)) {
+    stop(sprintf("Matrix T is not square: %d x %d. Check if header=TRUE is needed.", nrow(T), ncol(T)))
+  }
 
   list(D = D, T = T)
 }
@@ -296,10 +310,11 @@ extract_metrics <- function(spectral_result) {
 #'
 #' @param n Size of matrices (default: 5)
 #' @param seed Random seed for reproducibility
+#' @param save_files Logical, whether to save as CSV files (default: TRUE)
 #'
 #' @return List with D and T matrices
 #' @export
-create_example_dematel <- function(n = 5, seed = 123) {
+create_example_dematel <- function(n = 5, seed = 123, save_files = TRUE) {
 
   set.seed(seed)
 
@@ -314,6 +329,17 @@ create_example_dematel <- function(n = 5, seed = 123) {
   # Compute total relations matrix
   I <- diag(n)
   T <- D %*% solve(I - D)
+
+  if (save_files) {
+    # Save CSV files without headers and ensure proper line endings
+    write.table(D, "D_example.csv", sep = ",", row.names = FALSE, col.names = FALSE,
+                quote = FALSE, eol = "\n")
+    write.table(T, "T_example.csv", sep = ",", row.names = FALSE, col.names = FALSE,
+                quote = FALSE, eol = "\n")
+
+    cat("Example matrices saved as 'D_example.csv' and 'T_example.csv'\n")
+    cat("Both files saved without headers (use header=FALSE when reading)\n")
+  }
 
   list(D = D, T = T)
 }
