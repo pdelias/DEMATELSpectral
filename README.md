@@ -74,7 +74,7 @@ Load D and T matrices from CSV files with proper validation.
 |--------|-------------|----------------|
 | **λmax** | Maximum eigenvalue | Maximum long-term influence propagation potential |
 | **Spectral Radius** | Largest absolute eigenvalue | System's overall influence magnitude |
-| **Condition Number** | λmax/λmin ratio | Numerical sensitivity (>100 = high sensitivity) |
+| **Condition Number** | λmax/λmin ratio | Numerical sensitivity |
 | **Amplification Factor** | 1/(1-ρ(D)) | How much initial effects can amplify |
 | **Convergence Rate** | -ln(λ2/λmax) | Speed of pattern stabilization |
 | **Concentration Ratio** | λmax/Σλi | Dominance of primary influence mode |
@@ -123,17 +123,6 @@ Your CSV files should contain **square numeric matrices** representing:
 0.200,0.000,0.180
 0.100,0.130,0.000
 ```
-
-## 🔬 Research Applications
-
-This package is designed for researchers analyzing complex systems such as:
-
-- **Supply chain networks**
-- **Organizational structures** 
-- **Sustainability assessments**
-- **Policy intervention systems**
-- **Risk management frameworks**
-- **Social network analysis**
 
 ## 📚 Multiple Case Analysis
 
