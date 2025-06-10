@@ -1,11 +1,31 @@
 Package: DEMATELSpectral
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Type: Package
+Title: Spectral Analysis and Sensitivity Analysis Extensions for DEMATEL Method
+Version: 0.2.0
+Authors@R: person("Pavlos", "Delias", email = "pdelias@af.duth.gr", role = c("aut", "cre"))
+Description: Enhances the Decision-Making Trial and Evaluation Laboratory (DEMATEL) 
+    method with spectral analysis capabilities and comprehensive sensitivity analysis,
+    providing deeper insights into system dynamics, stability characteristics, 
+    intervention potential through eigenvalue decomposition, and critical 
+    relationship identification through sensitivity matrices.
+License: MIT + file LICENSE
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+LazyData: true
+RoxygenNote: 7.3.1
+Imports: 
+    Matrix,
+    ggplot2,
+    reshape2,
+    viridis,
+    corrplot,
+    dplyr,
+    gridExtra
+Suggests: 
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+URL: https://github.com/pdelias/DEMATELSpectral
+BugReports: https://github.com/pdelias/DEMATELSpectral/issues
+Depends: R (>= 3.5.0)
+
