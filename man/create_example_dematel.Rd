@@ -4,12 +4,14 @@
 \alias{create_example_dematel}
 \title{Create example DEMATEL matrices}
 \usage{
-create_example_dematel(n = 5, seed = 123)
+create_example_dematel(n = 5, seed = 123, save_files = TRUE)
 }
 \arguments{
 \item{n}{Size of matrices (default: 5)}
 
 \item{seed}{Random seed for reproducibility}
+
+\item{save_files}{Logical, whether to save as CSV files (default: TRUE)}
 }
 \value{
 List with D and T matrices
